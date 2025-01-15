@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hamro Parking</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <h1>Hamro Parking</h1>
+    <p>Smart Parking Management System</p>
+  </header>
+
+  <div class="slot-summary">
+    <div class="summary available-slots">
+      Available Slots: <span id="available-count">4</span>
+    </div>
+    <div class="summary occupied-slots">
+      Occupied Slots: <span id="occupied-count">2</span>
+    </div>
+  </div>
+
+  <main class="container" id="slots-container">
+    <!-- Parking Slots will be populated here -->
+  </main>
+
+  <!-- <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 HamroParking</p><p> All rights reserved.</p>
+      <div class="footer-links">
+        <a href="">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="mailto:nischals054@gmail.com">Contact Us</a>
+      </div>
+    </div>
+  </footer> -->
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Fetch slot data from the backend
+      fetch('http://localhost:3000/slots')
+        .then(response => response.json())
+        .then(data => {
+          const slotsContainer = document.getElementById('slots-container');
+          const availableCount = document.getElementById('available-count');
+          const occupiedCount = document.getElementById('occupied-count');
+    
+          // Clear previous slot data
+          slotsContainer.innerHTML = '';
+    
+          let availableSlots = 0;
+          let occupiedSlots = 0;
+    
+          // Loop through the slot data and render it
+          data.forEach(slot => {
+            const slotCard = document.createElement('div');
+            slotCard.classList.add('slot-card');
+            slotCard.innerHTML = `
+              <div class="slot-header">
+                <h2>Slot ${slot.id}</h2>
+                <span class="status ${(slot?.currentEvent?.inTime && slot?.currentEvent?.outTime===null) ? 'occupied' : 'available'}">
+                  ${(slot?.currentEvent?.inTime && slot?.currentEvent?.outTime===null) ? 'Occupied' : 'Available'}
+                </span>
+              </div>
+              <div class="slot-details">
+                <p><strong>Parking Time</strong></p>
+                <label>In-Time:</label>
+                <input type="text" value="${slot?.currentEvent?.inTime || ''}" disabled>
+                <label>Out-Time:</label>  
+                <input type="text" value="${slot?.currentEvent?.outTime || ''}" disabled>
+                <label>Duration:</label>
+                <input type="text" value="${slot?.currentEvent?.duration || 'N/A'}" disabled> <!-- Display duration or N/A -->
+              </div>
+            `;
+    
+            // Update available and occupied counts
+            if (slot?.currentEvent?.inTime && slot?.currentEvent?.outTime===null) {
+              occupiedSlots++;
+            } else {
+              availableSlots++;
+            }
+    
+            // Append the slot card to the container
+            slotsContainer.appendChild(slotCard);
+          });
+    
+          // Update the summary counts
+          availableCount.textContent = availableSlots;
+          occupiedCount.textContent = occupiedSlots;
+        })
+        .catch(error => {
+          console.error('Error fetching slot data:', error);
+        });
+    });
+    
+    function calculateDuration(inTime, outTime) {
+  try {
+    // Normalize time to "HH:mm" format
+    const normalizeTime = (time) => {
+      const [hours, minutes] = time.split(":").map(Number);
+      const normalizedHours = hours.toString().padStart(2, "0");
+      const normalizedMinutes = minutes.toString().padStart(2, "0");
+      return `${normalizedHours}:${normalizedMinutes}`;
+    };
+
+    // Normalize input times
+    const normalizedInTime = normalizeTime(inTime);
+    const normalizedOutTime = normalizeTime(outTime);
+
+    // Create date objects with normalized times
+    const inDate = new Date(`1970-01-01T${normalizedInTime}:00`);
+    const outDate = new Date(`1970-01-01T${normalizedOutTime}:00`);
+
+    // Validate date objects
+    if (isNaN(inDate) || isNaN(outDate)) {
+      return "Invalid time format";
+    }
+
+    // Calculate duration in hours
+    const duration = (outDate - inDate) / (1000 * 60 * 60); // Convert milliseconds to hours
+
+    // Return formatted duration
+    return duration >= 0
+      ? `${duration.toFixed(2)} hrs`
+      : "Invalid time range (outTime is earlier than inTime)";
+  } catch (error) {
+    return "Error calculating duration";
+  }
+}
+
+
+  </script>
+</body>
+</html>

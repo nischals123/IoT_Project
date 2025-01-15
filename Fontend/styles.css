@@ -1,0 +1,172 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  header {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 2rem;
+  }
+  
+  header p {
+    margin: 0.5rem 0 0;
+    font-size: 1rem;
+  }
+  
+  /* Slot Summary */
+  .slot-summary {
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .summary {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  
+  .available-slots {
+    color: #2ecc71;
+  }
+  
+  .occupied-slots {
+    color: #e74c3c;
+  }
+  
+  /* Container for slots */
+  .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 2rem;
+  }
+  
+  /* Slot Card */
+  .slot-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .slot-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Slot Header */
+  .slot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 0.5rem;
+  }
+  
+  .slot-header h2 {
+    font-size: 1.25rem;
+    margin: 0;
+  }
+  
+  .status {
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+  }
+  
+  .status.available {
+    background-color: #2ecc71;
+    color: white;
+  }
+  
+  .status.occupied {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  /* Slot Details */
+  .slot-details {
+    margin-top: 1rem;
+  }
+  
+  .slot-details p {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .slot-details label {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+ /* Adjust input field width */
+.slot-details input {
+    width: calc(100% - 1rem); /* Match input to card width minus padding */
+    padding: 0.5rem;
+    margin-top: 0.25rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Ensure padding doesn't affect total width */
+  }
+  
+  
+  .slot-details input:disabled {
+    background-color: #f0f0f0;
+  }
+
+  /* Footer Styles */
+/* footer {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1.5rem 0;
+    text-align: center;
+    margin-top: 2rem;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  footer .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  footer p {
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  footer .footer-links {
+    margin-top: 0.5rem;
+  }
+  
+  footer .footer-links a {
+    color: #1abc9c;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+  }
+  
+  footer .footer-links a:hover {
+    color: #16a085;
+  } */
+  
+  
