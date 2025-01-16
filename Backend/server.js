@@ -168,8 +168,13 @@ app.get('/events', async (req, res) => {
     }
 });
 
+
+
+
 // Start the server
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Index file path: ${path.join(__dirname, '..', 'Frontend', 'index.html')}`);
+
 });
