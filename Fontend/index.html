@@ -38,9 +38,10 @@
   </footer> -->
 
   <script>
+    const BASE_URL = 'https://iot-project-1.onrender.com';
     document.addEventListener("DOMContentLoaded", function() {
       // Fetch slot data from the backend
-      fetch('http://localhost:3000/slots')
+      fetch(`${BASE_URL}/slots`)
         .then(response => response.json())
         .then(data => {
           const slotsContainer = document.getElementById('slots-container');
