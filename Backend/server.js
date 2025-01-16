@@ -10,10 +10,16 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // MongoDB URI
-const mongoURI = 'mongodb://localhost:27017/parkingDB'; // Replace with your MongoDB connection string
+const mongoURI = 'mongodb+srv://hamroparking:hamropark%40098@iot.qpglu.mongodb.net/'; // Replace with your MongoDB connection string
 
 // Connect to MongoDB
-mongoose.connect(mongoURI)
+mongoose.connect(mongoURI, {
+    serverApi:{
+        version: '1',
+        strict: false,
+        deprecationErrors: true
+    }
+})
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('Error connecting to MongoDB:', err));
 

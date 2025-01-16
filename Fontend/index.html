@@ -38,16 +38,18 @@
   </footer> -->
 
   <script>
+    const BASE_URL_dev = 'http://localhost:3000';
     const BASE_URL = 'https://iot-project-1.onrender.com';
     document.addEventListener("DOMContentLoaded", function() {
       // Fetch slot data from the backend
+      console.log('Fetching slot data...');
       fetch(`${BASE_URL}/slots`)
         .then(response => response.json())
         .then(data => {
           const slotsContainer = document.getElementById('slots-container');
           const availableCount = document.getElementById('available-count');
           const occupiedCount = document.getElementById('occupied-count');
-    
+            console.warn(data);
           // Clear previous slot data
           slotsContainer.innerHTML = '';
     
